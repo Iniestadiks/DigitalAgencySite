@@ -1,3 +1,18 @@
-home:
-    path: /
-    controller: App\Controller\HomeController::index
+# Charger toutes les routes définies par des attributs dans les contrôleurs
+controllers:
+    resource: '../src/Controller/'
+    type: attribute
+
+# Configuration des routes spécifiques
+# Comme nous avons seulement développé la page d'accueil et potentiellement la page d'actualités jusqu'à présent,
+# Voici comment ces routes peuvent être configurées en s'inspirant de l'exemple:
+
+# Déjà configuré via le contrôleur avec des attributs
+# home:
+#     path: /
+#     controller: App\Controller\HomeController::index
+
+# Route pour la page d'actualités (si vous avez un NewsController)
+news:
+    path: /news
+    controller: App\Controller\NewsController::index
