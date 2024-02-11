@@ -1,0 +1,26 @@
+{# templates/contact/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Contactez-nous{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Contactez-nous</h1>
+    <p>Si vous avez des questions ou si vous souhaitez entrer en contact avec nous, veuillez remplir le formulaire ci-dessous.</p>
+    
+    {{ form_start(contact_form) }}
+        {{ form_row(contact_form.name) }}
+        {{ form_row(contact_form.email) }}
+        {{ form_row(contact_form.message) }}
+        <div>
+            {{ form_row(contact_form.send) }}
+        </div>
+    {{ form_end(contact_form) }}
+    
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
