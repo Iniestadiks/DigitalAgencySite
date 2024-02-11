@@ -1,0 +1,16 @@
+{# templates/news/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Page des Actualités{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Actualités</h1>
+    {% for news in news_items %}
+    <div class="news-item">
+        <h2>{{ news.title }}</h2>
+        <p>{{ news.content }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
