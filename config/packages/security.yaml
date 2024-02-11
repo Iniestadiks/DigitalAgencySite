@@ -3,14 +3,10 @@ security:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     
     providers:
-        # Supprimez ou commentez la ligne des utilisateurs en mémoire
-        # users_in_memory: { memory: null }
-        
-        # Ajoutez votre provider qui utilise l'entité User
         app_user_provider:
             entity:
                 class: App\Entity\User
-                property: email # ou un autre champ unique de votre choix
+                property: email
 
     firewalls:
         dev:
@@ -19,25 +15,19 @@ security:
         main:
             lazy: true
             provider: app_user_provider
-            
-            # Activez le formulaire de connexion
+            entry_point: App\Security\AppAuthenticator
             form_login:
                 login_path: app_login
                 check_path: app_login
-            
-            # Activez la déconnexion
             logout:
                 path: app_logout
-                target: app_any_route # Redirigez vers une route après la déconnexion
-            custom_authenticator: App\Security\AppAuthenticator
-
+                target: home # Assurez-vous que cette route existe dans votre application
             remember_me:
                 secret: '%kernel.secret%'
-                lifetime: 604800
+                lifetime: 604800  # 1 semaine en secondes
                 path: /
                 always_remember_me: true
 
     access_control:
-        # Exemples d'accès contrôlés
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/profile, roles: ROLE_USER }
