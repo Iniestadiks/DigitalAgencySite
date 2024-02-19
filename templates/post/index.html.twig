@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des posts{% endblock %}
+
+{% block body %}
+<div class="container mt-2">
+    <a href="/home"><button type="button" class="btn btn-primary"><- Retour</button></a>
+    <h1>Liste des posts</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Image</th>
+                <th>Titre</th>
+                <th>Contenue</th>
+                <th>Auteur</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for post in posts %}
+            <tr>
+                <td>{{ post.id }}</td>
+                <td><img src='{{ asset('images/' ~ post.image) }}' width="80" height="80" alt"Image"></td>
+                <td>{{ post.title }}</td>
+                <td>{{ post.content }}</td>
+                <td>{{ post.author }}</td>
+                <td>{{ post.publishedDate ? post.publishedDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                {{post.slug}}
+                    <a href="{{ path('app_post_show', {'slug': post.title}) }}"><div class="btn btn-primary">Voir</div></a>
+                    <a href="{{ path('app_post_edit', {'slug': post.title}) }}"><div class="btn btn-success">Modifier</div></a>
+                    <a href="{{ path('app_post_delete', {'slug': post.title}) }}"><div class="btn btn-danger">Suprimer</div></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Rien à afficher</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div id="pagination">
+    {{ knp_pagination_render(posts) }}
+    </div>
+    <a href="{{ path('app_post_new') }}"><button type="button" class="btn btn-primary">+ Créer un nouveau</button></a>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Post{% endblock %}
+
+{% block body %}
+<div class="container mt-2">
+    <h1>Post</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ post.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ post.title }}</td>
+            </tr>
+            <tr>
+                <th>Contenue</th>
+                <td>{{ post.content }}</td>
+            </tr>
+            <tr>
+                <th>Auteur</th>
+                <td>{{ post.author }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ post.publishedDate ? post.publishedDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between">
+        <a href="/post"><button type="button" class="btn btn-primary"><- Retour</button></a>
+
+        {% if post.title is defined %}
+            <a href="{{ path('app_post_edit', {'slug': post.title}) }}"><button type="button" class="btn btn-success">Modifier</button></a>
+            <a href="{{ path('app_post_delete', {'slug': post.title}) }}"><button type="button" class="btn btn-danger">Supprimer</button></a>
+        {% endif %}
+    </div>
+</div>
+
+
+    
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier post{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Modifier post</h1>
+
+     {{ include('post/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <div class="d-flex justify-content-between">
+        <a href="/post"><button type="button" class="btn btn-primary"><- Retour</button></a>
+        {{ include('post/_delete_form.html.twig') }}
+    </div>
+
+
+</div>
+{% endblock %}
